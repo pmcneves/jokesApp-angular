@@ -1,0 +1,80 @@
+@import '../styles/base/settings.scss';
+
+
+header {
+  display: flex;
+  color: $off-white;
+  justify-content: space-between;
+  background-color: $dark-blue;
+  padding: $l-size $xl-size;
+}
+
+.brand {
+  font-family: 'Kaushan Script';
+  font-size: $font-size-medium
+}
+
+.nav-items {
+  display: flex;
+}
+
+.navbar-item {
+  cursor: pointer;
+  color: grey;
+  font-size: $font-size-small;
+  text-decoration: none;
+  &:not(:last-child) {
+      margin-right: $m-size
+  }
+  &:hover {
+      color: $off-white;
+  }
+}
+
+.active {
+  color: $off-white;
+}
+
+
+.main-container {
+  background-color: $off-white;
+  border: 2px solid $dark-blue;
+  border-radius: 5px;
+  min-height: 200px;
+}
+
+@media only screen and (min-width: 600px) {
+  .main-container {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .main-container {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .main-container {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .main-container {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar-item {
+      font-size: $font-size-medium
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .brand {
+      font-size: $font-size-large
+  }
+}

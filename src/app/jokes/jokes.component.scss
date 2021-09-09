@@ -1,0 +1,29 @@
+@import '../../styles/base/settings.scss';
+
+.section {
+  text-align: center;
+}
+
+.no-joke-p {
+  margin-bottom: $m-size;
+}
+
+.icon {
+  padding-bottom: $l-size;
+}
+
+.btn {
+  background-color: $dark-blue;
+  border: none;
+  border-radius: 5px;
+  color: $off-white;
+  font-size: $font-size-small;
+  padding: $m-size;
+  transition: background-color 0.3s linear;
+  &:hover {
+      background-color: $super-dark-blue;
+  }
+  &:disabled {
+      opacity: 0.5
+  }
+}

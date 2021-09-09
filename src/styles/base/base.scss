@@ -1,0 +1,13 @@
+body {
+  background: #efefef;
+  font-family: 'Roboto', sans-serif;
+  height: 100vh;
+}
+
+
+button {
+  cursor: pointer;
+  &:disabled {
+      cursor: not-allowed
+  }
+}
