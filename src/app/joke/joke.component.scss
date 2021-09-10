@@ -1,0 +1,11 @@
+@import '../../styles/base/settings.scss';
+
+.joke-setup {
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.joke-delivery {
+  margin-top: $m-size;
+  font-style: italic
+}

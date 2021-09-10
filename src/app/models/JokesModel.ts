@@ -1,4 +1,4 @@
-export interface Joke extends Flags {
+export type Joke = {
   error: string,
   category: string,
   type: string,
