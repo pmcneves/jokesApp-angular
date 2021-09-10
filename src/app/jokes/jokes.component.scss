@@ -12,6 +12,11 @@
   padding-bottom: $l-size;
 }
 
+// .btn-container {
+//     text-align: center;
+//     margin: $l-size $m-size
+// }
+
 .btn {
   background-color: $dark-blue;
   border: none;
@@ -19,6 +24,7 @@
   color: $off-white;
   font-size: $font-size-small;
   padding: $m-size;
+  margin: $l-size $m-size;
   transition: background-color 0.3s linear;
   &:hover {
       background-color: $super-dark-blue;

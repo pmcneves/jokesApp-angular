@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { JokesComponent } from './jokes/jokes.component';
 import { LibraryComponent } from './library/library.component';
 import { JokeComponent } from './joke/joke.component';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import { JokeComponent } from './joke/joke.component';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxsModule.forRoot([JokesState], {
+      developmentMode: !environment.production
+    })
   ],
   providers: [],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],

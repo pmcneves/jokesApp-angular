@@ -1,1 +1,11 @@
-<p>joke works!</p>
+<ng-container *ngIf="joke.type === 'twopart'; else onepart">
+  <div>
+    <p class="joke-setup">{{joke.setup}}</p>
+    <p class="joke-delivery">{{joke.delivery}}</p>
+  </div>
+</ng-container>
+
+<ng-template #onepart>
+  <p class="joke-setup">{{joke.joke}}</p>
+</ng-template>
+

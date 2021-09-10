@@ -11,7 +11,6 @@ export class JokeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.joke)
   }
 
 }
