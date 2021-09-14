@@ -1,4 +1,4 @@
-@import '../../styles/base/settings.scss';
+@import "../../styles/base/settings.scss";
 
 .section {
   text-align: center;
@@ -23,9 +23,9 @@
   margin: $l-size $m-size;
   transition: background-color 0.3s linear;
   &:hover {
-      background-color: $super-dark-blue;
+    background-color: $super-dark-blue;
   }
   &:disabled {
-      opacity: 0.5
+    opacity: 0.5;
   }
 }

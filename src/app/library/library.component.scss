@@ -1,40 +1,39 @@
-@import '../../styles/base/settings.scss';
+@import "../../styles/base/settings.scss";
 
-.favourite-section {
-    margin: 0 auto;
+.section {
     text-align: center;
-    width: 95%;
-    &:not(:last-child) {
-        border-bottom: black solid 1px 
-    }
+    padding: $m-size;
+  }
+
+.favourites {
+  margin: 0 auto;
+  text-align: center;
+  width: 95%;
+  &:not(:last-child) {
+    border-bottom: black solid 1px;
+  }
 }
 
 .favourite-container {
-    display: flex;
-    align-items: center;
-    padding: $xl-size $l-size;
-
-}
-
-.favourite-joke-counter {
-    // display: none;
+  display: flex;
+  align-items: center;
+  &__joke-counter {
     width: 10%;
-}
-
-.joke-container {
+  }
+  &__joke {
     width: 85%;
     padding-right: $m-size;
-}
-
-.removeBtn-container {
+  }
+  &__removeBtn {
     width: 5%;
     color: grey;
     button {
-        background: none;
-        border:none;
-        color: grey;
-        &:hover {
-            color: red;
-        }
+      background: none;
+      border: none;
+      color: grey;
+      &:hover {
+        color: red;
+      }
     }
+  }
 }

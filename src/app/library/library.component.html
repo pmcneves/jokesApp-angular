@@ -1,13 +1,21 @@
-<section class="favourite-section" *ngFor="let singleJoke of jokesState; let i = index">
-  <div class="favourite-container">
-    <h3 class="favourite-joke-counter">#{{i + 1}}</h3>
-    <div class="joke-container">
-      <app-joke [joke]="singleJoke"></app-joke>
+<section class="section">
+  <ng-container *ngIf="jokesState.length !== 0; else noFavourites">
+    <div class="favourites" *ngFor="let singleJoke of jokesState; let i = index">
+      <div class="favourite-container">
+        <h3 class="favourite-container__joke-counter">#{{i + 1}}</h3>
+        <div class="favourite-container__joke">
+          <app-joke [joke]="singleJoke"></app-joke>
+        </div>
+        <div class="favourite-container__removeBtn">
+          <button (click)="removeFavourite(singleJoke.id)">
+            <fa-icon [icon]="faTimes"></fa-icon>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="removeBtn-container">
-      <button (click)="removeFavourite(singleJoke.id)">
-        <fa-icon [icon]="faTimes"></fa-icon>
-      </button>
-    </div>
-  </div>
+  </ng-container>
 </section>
+
+<ng-template #noFavourites>
+      <h3>No favourites... yet!</h3>
+</ng-template>

@@ -19,6 +19,11 @@ export class JokeState {
     return state.jokes;
   }
 
+  @Selector()
+  static getJoke(state: JokeStateModel) {
+    return state.currentJoke
+  }
+
   @Action(AddJokeToFavourites)
   add(
     { getState, patchState }: StateContext<JokeStateModel>,
