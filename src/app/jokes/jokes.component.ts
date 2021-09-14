@@ -17,6 +17,7 @@ export class JokesComponent implements OnInit {
   joke: Joke;
   loading: boolean = false;
   isAddedToFavourites: boolean = false
+  isModalOpen: boolean = false
   @Select(JokeState.getJoke) jokeSelector$: Observable<Joke>
 
   constructor(private jokesService: JokesService, private store: Store) { }
@@ -39,5 +40,9 @@ export class JokesComponent implements OnInit {
     this.store.dispatch(new AddJokeToFavourites(this.joke!))
     this.isAddedToFavourites = true;
     this.gettingJokes();
+  }
+
+  openModal() {
+    this.isModalOpen=true
   }
 }
