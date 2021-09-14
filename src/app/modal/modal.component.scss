@@ -1,0 +1,63 @@
+@import "../../styles/base/settings.scss";
+
+.modal {
+  display: flex;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 0;
+  height: 100vh;
+  left: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+  &__content {
+    background-color: $off-white;
+    border: $dark-blue solid 2px;
+    border-radius: 5px;
+    margin: auto;
+    width: 90%;
+  }
+  &__header {
+    padding: $s-size;
+  }
+  &__btns {
+    & .btn__close {
+      background-color: $dark-red;
+      border: none;
+      border-radius: 5px;
+      color: $off-white;
+      font-size: $font-size-small;
+      padding: $m-size;
+      transition: background-color 0.3s linear;
+      &:hover {
+        background-color: $super-dark-red;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .modal__content {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .modal__content {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .modal__content {
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .modal__content {
+    width: 20%;
+  }
+}

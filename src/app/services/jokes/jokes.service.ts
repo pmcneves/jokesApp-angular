@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Joke } from 'src/app/models/JokesModel';
+import { Observable, Subject } from 'rxjs';
+import { Joke, JokeData } from 'src/app/models/JokesModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JokesService {
+  currentJoke: Subject<JokeData> = new Subject<JokeData>();
 
-  jokesUrl: string = 'https://v2.jokeapi.dev/joke/Any'
-  constructor(private http: HttpClient) { }
+  jokesUrl: string = 'https://v2.jokeapi.dev/joke/Any';
+  constructor(private http: HttpClient) {}
 
-  getJokes(): Observable<Joke> {
-    return this.http.get<Joke>(this.jokesUrl)
+  getJokes() : void {
+    this.http.get<JokeData>(this.jokesUrl).subscribe(joke=>this.currentJoke.next(joke));
   }
 }

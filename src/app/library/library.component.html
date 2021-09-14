@@ -1,5 +1,13 @@
 <section class="section">
   <ng-container *ngIf="jokesState.length !== 0; else noFavourites">
+    <div class="selections">
+      <select>
+        <option value="" disabled hidden>Choose option</option>
+        <option>Funnier first</option>
+        <option>Not so funny first</option>
+      </select>
+      <button>Clear all</button>
+    </div>
     <div class="favourites" *ngFor="let singleJoke of jokesState; let i = index">
       <div class="favourite-container">
         <h3 class="favourite-container__joke-counter">#{{i + 1}}</h3>
@@ -7,7 +15,7 @@
           <app-joke [joke]="singleJoke"></app-joke>
         </div>
         <div class="favourite-container__removeBtn">
-          <button (click)="removeFavourite(singleJoke.id)">
+          <button (click)="removeFavourite(singleJoke.jokeData.id)">
             <fa-icon [icon]="faTimes"></fa-icon>
           </button>
         </div>

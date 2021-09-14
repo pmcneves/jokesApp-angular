@@ -1,0 +1,19 @@
+<section class="modal__rating">
+  <div *ngFor="let star of starRating; let indexStar = index">
+    <label [attr.key]="indexStar">
+      <input
+        type="radio"
+        name="selectedRate"
+        [value]="indexStar + 1"
+        (click)="setStarRating(indexStar + 1)"
+      />
+      <fa-icon
+        class="icon-star"
+        [ngClass]="indexStar + 1 <= (hover || selectedRate) ? 'selected' : ''"
+        (mouseenter)="onStarHover(indexStar + 1)"
+        (mouseleave)="onStarLeave()"
+        [icon]="faStar"
+      ></fa-icon>
+    </label>
+  </div>
+</section>

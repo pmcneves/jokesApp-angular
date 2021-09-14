@@ -1,0 +1,22 @@
+@import '../../styles/base/settings.scss';
+
+
+.modal__rating{
+    display: flex;
+    justify-content: center;
+}
+
+input[type="radio"] {
+    display: none
+}
+
+.icon-star {
+    color: $star-grey;
+    cursor: pointer;
+}
+
+.selected {
+    color: $star-yellow;
+}
+
+

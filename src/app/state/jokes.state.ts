@@ -1,27 +1,37 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { AddJokeToFavourites, FetchNewJoke, RemoveJoke, SetJokes } from '../actions/joke.actions';
+import {
+  AddJokeToFavourites,
+  FetchNewJoke,
+  RemoveJoke,
+  SetJokes,
+} from '../actions/joke.actions';
 import { Joke } from '../models/JokesModel';
 
 export class JokeStateModel {
-  jokes: Joke[];
-  currentJoke: Joke | null
+  joke: Joke | {};
+  favourites: Joke[];
+  error: string | null;
 }
 @State<JokeStateModel>({
   name: 'jokesState',
   defaults: {
-    jokes: [],
-    currentJoke: null
+    joke: {
+      jokeData: {},
+      isFavourite: false,
+    },
+    favourites: [],
+    error: null,
   },
 })
 export class JokeState {
   @Selector()
   static getJokes(state: JokeStateModel) {
-    return state.jokes;
+    return state.favourites;
   }
 
   @Selector()
   static getJoke(state: JokeStateModel) {
-    return state.currentJoke
+    return state.joke;
   }
 
   @Action(AddJokeToFavourites)
@@ -31,26 +41,29 @@ export class JokeState {
   ) {
     const state = getState();
     patchState({
-      jokes: [...state.jokes, payload],
+      favourites: [...state.favourites, payload],
     });
-    localStorage.setItem('jokes', JSON.stringify([...state.jokes, payload]));
+    localStorage.setItem('favourites', JSON.stringify([...state.favourites, payload]));
   }
 
   @Action(FetchNewJoke)
-  fetchNewJoke({patchState}: StateContext<JokeStateModel>, {payload}: FetchNewJoke) {
+  fetchNewJoke(
+    { patchState }: StateContext<JokeStateModel>,
+    { payload }: FetchNewJoke
+  ) {
     patchState({
-      currentJoke: payload
-    })
-    localStorage.setItem('joke', JSON.stringify(payload))
+      joke: payload,
+    });
+    localStorage.setItem('joke', JSON.stringify(payload));
   }
 
   @Action(SetJokes)
-  set({patchState} : StateContext<JokeStateModel>) {
-    const localStore = localStorage.getItem('jokes')
-    const localJokes = localStore ?  JSON.parse(localStore) : []
+  set({ patchState }: StateContext<JokeStateModel>) {
+    const localStore = localStorage.getItem('favourites');
+    const localJokes = localStore ? JSON.parse(localStore) : [];
     patchState({
-      jokes: localJokes
-    })
+      favourites: localJokes,
+    });
   }
 
   @Action(RemoveJoke)
@@ -59,8 +72,8 @@ export class JokeState {
     { id }: RemoveJoke
   ) {
     patchState({
-      jokes: getState().jokes.filter((joke) => joke.id != id),
+      favourites: getState().favourites.filter(favourite => favourite.jokeData!.id != id),
     });
-    localStorage.setItem('jokes', JSON.stringify(getState().jokes))
+    localStorage.setItem('favourites', JSON.stringify(getState().favourites));
   }
 }
