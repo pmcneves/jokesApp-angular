@@ -13,12 +13,14 @@ import { environment } from 'src/environments/environment';
 import { JokeState } from './state/jokes.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CommonModule } from '@angular/common';
+import { ModalComponent } from './modal/modal.component';
 @NgModule({
   declarations: [
     AppComponent,
     JokesComponent,
     LibraryComponent,
-    JokeComponent
+    JokeComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,

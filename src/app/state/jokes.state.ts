@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { AddJoke, RemoveJoke, SetJokes } from '../actions/joke.actions';
+import { AddJokeToFavourites, FetchNewJoke, RemoveJoke, SetJokes } from '../actions/joke.actions';
 import { Joke } from '../models/JokesModel';
 
 export class JokeStateModel {
@@ -19,16 +19,29 @@ export class JokeState {
     return state.jokes;
   }
 
-  @Action(AddJoke)
+  @Selector()
+  static getJoke(state: JokeStateModel) {
+    return state.currentJoke
+  }
+
+  @Action(AddJokeToFavourites)
   add(
     { getState, patchState }: StateContext<JokeStateModel>,
-    { payload }: AddJoke
+    { payload }: AddJokeToFavourites
   ) {
     const state = getState();
     patchState({
       jokes: [...state.jokes, payload],
     });
     localStorage.setItem('jokes', JSON.stringify([...state.jokes, payload]));
+  }
+
+  @Action(FetchNewJoke)
+  fetchNewJoke({patchState}: StateContext<JokeStateModel>, {payload}: FetchNewJoke) {
+    patchState({
+      currentJoke: payload
+    })
+    localStorage.setItem('joke', JSON.stringify(payload))
   }
 
   @Action(SetJokes)
