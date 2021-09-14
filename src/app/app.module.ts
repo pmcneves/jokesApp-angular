@@ -14,13 +14,15 @@ import { JokeState } from './state/jokes.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal/modal.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 @NgModule({
   declarations: [
     AppComponent,
     JokesComponent,
     LibraryComponent,
     JokeComponent,
-    ModalComponent
+    ModalComponent,
+    StarRatingComponent
   ],
   imports: [
     CommonModule,

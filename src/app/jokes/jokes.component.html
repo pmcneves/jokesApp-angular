@@ -3,7 +3,7 @@
     <app-joke [joke]="joke"></app-joke>
   </ng-container>
   <button class="btn" [disabled]="loading" (click)="gettingJokes()" > {{ loading ? 'Fetching jokes...' : 'Give me jokes!' }}</button>
-  <button class="btn" [hidden]="!joke" [disabled]="loading || isAddedToFavourites" (click)="addToFavourites()"> {{ isAddedToFavourites ? 'Already added to Favourites' : 'I laughed :)' }} </button>
+  <button class="btn" [hidden]="!joke" [disabled]="loading || isAddedToFavourites" (click)="openModal()"> {{ isAddedToFavourites ? 'Already added to Favourites' : 'I laughed :)' }} </button>
 </section>
 
 <ng-template #noJoke>
@@ -14,3 +14,5 @@
     </div>
   </div>
 </ng-template>
+
+<app-modal [hidden]="!isModalOpen" (closeButtonClicked)="closeModal()"></app-modal>
