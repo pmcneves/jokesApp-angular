@@ -1,4 +1,4 @@
-export type Joke = {
+export type JokeData = {
   error: string,
   category: string,
   type: string,
@@ -9,6 +9,11 @@ export type Joke = {
   id: number,
   safe: boolean,
   lang: string
+}
+
+export type Joke = {
+  jokeData: JokeData,
+  isFavourite: boolean
 }
 
 interface Flags {

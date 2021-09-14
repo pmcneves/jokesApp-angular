@@ -2,6 +2,7 @@
 
 .modal {
   display: flex;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
   border: 0;
   height: 100vh;
@@ -20,10 +21,8 @@
   }
   &__header {
     padding: $s-size;
-    text-align: center;
   }
   &__btns {
-    text-align: center;
     & .btn__close {
       background-color: $dark-red;
       border: none;

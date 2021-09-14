@@ -5,6 +5,12 @@
     padding: $m-size;
   }
 
+.selections {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
 .favourites {
   margin: 0 auto;
   text-align: center;

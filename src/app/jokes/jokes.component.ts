@@ -23,23 +23,29 @@ export class JokesComponent implements OnInit {
   constructor(private jokesService: JokesService, private store: Store) {}
 
   ngOnInit(): void {
-    this.jokeSelector$.subscribe((joke) => (joke ? (this.joke = joke) : {}));
+    this.jokeSelector$.subscribe((joke) => !this.isObjectEmpty(joke.jokeData) ? (this.joke = joke) : {})
+  }
+
+  private isObjectEmpty(obj: {}): boolean {
+    for (const id in obj) {
+      return false;
+    }
+    return true;
   }
 
   gettingJokes() {
     this.loading = true;
-    this.jokesService.getJokes().subscribe((data) => {
-      this.joke = data;
+    this.jokesService.getJokes();
+    this.jokesService.currentJoke
+    .subscribe((data) => {
+      this.joke = {
+        jokeData: data,
+        isFavourite: false,
+      };
       this.loading = false;
       this.isAddedToFavourites = false;
       this.store.dispatch(new FetchNewJoke(this.joke));
     });
-  }
-
-  addToFavourites() {
-    this.store.dispatch(new AddJokeToFavourites(this.joke!));
-    this.isAddedToFavourites = true;
-    this.gettingJokes();
   }
 
   openModal() {
@@ -47,6 +53,6 @@ export class JokesComponent implements OnInit {
   }
 
   closeModal() {
-    this.isModalOpen = false
+    this.isModalOpen = false;
   }
 }
