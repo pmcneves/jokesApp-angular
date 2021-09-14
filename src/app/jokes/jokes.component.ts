@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faLaugh } from '@fortawesome/free-regular-svg-icons';
 import { Store } from '@ngxs/store';
-import { AddJoke } from '../actions/joke.actions';
+import { AddJokeToFavourites, FetchNewJoke } from '../actions/joke.actions';
 import { Joke } from '../models/JokesModel';
 import { JokesService } from '../services/jokes/jokes.service';
 
@@ -29,11 +29,12 @@ export class JokesComponent implements OnInit {
       this.loading = false;
       this.showJoke = true;
       this.isAddedToFavourites=false;
+      this.store.dispatch(new FetchNewJoke(this.joke))
     })
   }
 
   addToFavourites() {
-    this.store.dispatch(new AddJoke(this.joke))
+    this.store.dispatch(new AddJokeToFavourites(this.joke))
     this.isAddedToFavourites = true;
     this.gettingJokes();
   }
