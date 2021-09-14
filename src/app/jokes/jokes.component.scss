@@ -2,6 +2,7 @@
 
 .section {
   text-align: center;
+  padding: $m-size;
 }
 
 .no-joke-p {
@@ -11,11 +12,6 @@
 .icon {
   padding-bottom: $l-size;
 }
-
-// .btn-container {
-//     text-align: center;
-//     margin: $l-size $m-size
-// }
 
 .btn {
   background-color: $dark-blue;

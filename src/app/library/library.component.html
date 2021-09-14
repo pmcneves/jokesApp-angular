@@ -1,1 +1,13 @@
-<p>library works!</p>
+<section class="favourite-section" *ngFor="let singleJoke of jokesState; let i = index">
+  <div class="favourite-container">
+    <h3 class="favourite-joke-counter">#{{i + 1}}</h3>
+    <div class="joke-container">
+      <app-joke [joke]="singleJoke"></app-joke>
+    </div>
+    <div class="removeBtn-container">
+      <button (click)="removeFavourite(singleJoke.id)">
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+  </div>
+</section>

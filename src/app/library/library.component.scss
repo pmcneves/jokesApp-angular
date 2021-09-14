@@ -1,0 +1,40 @@
+@import '../../styles/base/settings.scss';
+
+.favourite-section {
+    margin: 0 auto;
+    text-align: center;
+    width: 95%;
+    &:not(:last-child) {
+        border-bottom: black solid 1px 
+    }
+}
+
+.favourite-container {
+    display: flex;
+    align-items: center;
+    padding: $xl-size $l-size;
+
+}
+
+.favourite-joke-counter {
+    // display: none;
+    width: 10%;
+}
+
+.joke-container {
+    width: 85%;
+    padding-right: $m-size;
+}
+
+.removeBtn-container {
+    width: 5%;
+    color: grey;
+    button {
+        background: none;
+        border:none;
+        color: grey;
+        &:hover {
+            color: red;
+        }
+    }
+}

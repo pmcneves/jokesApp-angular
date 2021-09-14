@@ -10,7 +10,9 @@ import { LibraryComponent } from './library/library.component';
 import { JokeComponent } from './joke/joke.component';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
-
+import { JokeState } from './state/jokes.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,13 +21,15 @@ import { environment } from 'src/environments/environment';
     JokeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    NgxsModule.forRoot([JokesState], {
+    NgxsModule.forRoot([JokeState], {
       developmentMode: !environment.production
-    })
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],

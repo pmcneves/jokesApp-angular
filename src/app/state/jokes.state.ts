@@ -1,13 +1,53 @@
-import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { AddJoke, RemoveJoke } from "../actions/joke.actions";
-import { Joke } from "../models/JokesModel";
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { AddJoke, RemoveJoke, SetJokes } from '../actions/joke.actions';
+import { Joke } from '../models/JokesModel';
 
 export class JokeStateModel {
-  jokes: Joke[]
-  @State<JokeStateModel>({
-    name: 'jokes',
-    defaults: {
+  jokes: Joke[];
+  currentJoke: Joke | null
+}
+@State<JokeStateModel>({
+  name: 'jokesState',
+  defaults: {
+    jokes: [],
+    currentJoke: null
+  },
+})
+export class JokeState {
+  @Selector()
+  static getJokes(state: JokeStateModel) {
+    return state.jokes;
+  }
 
-    }
-  })
+  @Action(AddJoke)
+  add(
+    { getState, patchState }: StateContext<JokeStateModel>,
+    { payload }: AddJoke
+  ) {
+    const state = getState();
+    patchState({
+      jokes: [...state.jokes, payload],
+    });
+    localStorage.setItem('jokes', JSON.stringify([...state.jokes, payload]));
+  }
+
+  @Action(SetJokes)
+  set({patchState} : StateContext<JokeStateModel>) {
+    const localStore = localStorage.getItem('jokes')
+    const localJokes = localStore ?  JSON.parse(localStore) : []
+    patchState({
+      jokes: localJokes
+    })
+  }
+
+  @Action(RemoveJoke)
+  remove(
+    { getState, patchState }: StateContext<JokeStateModel>,
+    { id }: RemoveJoke
+  ) {
+    patchState({
+      jokes: getState().jokes.filter((joke) => joke.id != id),
+    });
+    localStorage.setItem('jokes', JSON.stringify(getState().jokes))
+  }
 }
