@@ -1,6 +1,7 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {
   AddJokeToFavourites,
+  EditJokeRating,
   FetchNewJoke,
   RemoveAllJokesFromFavourites,
   RemoveJoke,
@@ -84,10 +85,38 @@ export class JokeState {
   }
 
   @Action(RemoveAllJokesFromFavourites)
-  removeAll({patchState}: StateContext<JokeStateModel>) {
+  removeAll({ patchState }: StateContext<JokeStateModel>) {
     patchState({
-      favourites: []
+      favourites: [],
     });
-    localStorage.removeItem('favourites')
+    localStorage.removeItem('favourites');
+  }
+
+  @Action(EditJokeRating)
+  editJokeRating(
+    { getState, patchState }: StateContext<JokeStateModel>,
+    { id, newRating }: EditJokeRating
+  ) {
+    const state = getState();
+    let favouriteToEdit = state.favourites.find(
+      (favourite) => favourite.jokeData.id === id
+    ) as Joke;
+    favouriteToEdit = {
+      ...favouriteToEdit,
+      starRating: newRating
+    }
+    const favouriteToEditIndex = state.favourites.findIndex(
+      (favourite) => favourite.jokeData.id === id
+    );
+    console.log(favouriteToEdit, favouriteToEditIndex)
+
+    patchState({
+      favourites: [
+        ...state.favourites.slice(0, favouriteToEditIndex),
+        favouriteToEdit,
+        ...state.favourites.slice(favouriteToEditIndex+1),
+      ] as Joke[]
+    })
+    localStorage.setItem('favourites', JSON.stringify(getState().favourites));
   }
 }

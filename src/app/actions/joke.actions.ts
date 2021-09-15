@@ -26,6 +26,6 @@ export class RemoveAllJokesFromFavourites {
 }
 
 export class EditJokeRating {
-  static readonly type = 'Edit rating for current joke';
-  constructor(public id: number, public rating: number) {}
+  static type = 'Edit rating for current joke';
+  constructor(public id: number, public newRating: number) {}
 }

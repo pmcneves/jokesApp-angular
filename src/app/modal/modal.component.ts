@@ -11,7 +11,7 @@ import { JokesService } from '../services/jokes/jokes.service';
 export class ModalComponent implements OnInit {
   @Output() closeButtonClicked = new EventEmitter<boolean>();
   @Input() joke: Joke;
-  jokeRating: number;
+  jokeRating: number = 1;
 
   constructor(private store: Store, private jokesService: JokesService) {}
 
@@ -32,7 +32,7 @@ export class ModalComponent implements OnInit {
     this.closeModal();
   }
 
-  getSelectedStarRating (rating: number){
+  getSelectedStarRating(rating: number) {
     this.jokeRating = rating;
   }
 }

@@ -38,5 +38,6 @@ export class LibraryComponent implements OnInit {
 
   getSelectedStarRating(rating: number, id: number) {
     console.log('library', rating, id);
+    this.store.dispatch(new EditJokeRating(id, rating));
   }
 }
