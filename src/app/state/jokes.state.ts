@@ -1,7 +1,9 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {
   AddJokeToFavourites,
+  EditJokeRating,
   FetchNewJoke,
+  RemoveAllJokesFromFavourites,
   RemoveJoke,
   SetJokes,
 } from '../actions/joke.actions';
@@ -43,7 +45,10 @@ export class JokeState {
     patchState({
       favourites: [...state.favourites, payload],
     });
-    localStorage.setItem('favourites', JSON.stringify([...state.favourites, payload]));
+    localStorage.setItem(
+      'favourites',
+      JSON.stringify([...state.favourites, payload])
+    );
   }
 
   @Action(FetchNewJoke)
@@ -72,8 +77,46 @@ export class JokeState {
     { id }: RemoveJoke
   ) {
     patchState({
-      favourites: getState().favourites.filter(favourite => favourite.jokeData!.id != id),
+      favourites: getState().favourites.filter(
+        (favourite) => favourite.jokeData!.id != id
+      ),
     });
+    localStorage.setItem('favourites', JSON.stringify(getState().favourites));
+  }
+
+  @Action(RemoveAllJokesFromFavourites)
+  removeAll({ patchState }: StateContext<JokeStateModel>) {
+    patchState({
+      favourites: [],
+    });
+    localStorage.removeItem('favourites');
+  }
+
+  @Action(EditJokeRating)
+  editJokeRating(
+    { getState, patchState }: StateContext<JokeStateModel>,
+    { id, newRating }: EditJokeRating
+  ) {
+    const state = getState();
+    let favouriteToEdit = state.favourites.find(
+      (favourite) => favourite.jokeData.id === id
+    ) as Joke;
+    favouriteToEdit = {
+      ...favouriteToEdit,
+      starRating: newRating
+    }
+    const favouriteToEditIndex = state.favourites.findIndex(
+      (favourite) => favourite.jokeData.id === id
+    );
+    console.log(favouriteToEdit, favouriteToEditIndex)
+
+    patchState({
+      favourites: [
+        ...state.favourites.slice(0, favouriteToEditIndex),
+        favouriteToEdit,
+        ...state.favourites.slice(favouriteToEditIndex+1),
+      ] as Joke[]
+    })
     localStorage.setItem('favourites', JSON.stringify(getState().favourites));
   }
 }

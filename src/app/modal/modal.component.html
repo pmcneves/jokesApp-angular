@@ -3,10 +3,12 @@
     <div class="modal__header">
       <h3>Rate the joke!</h3>
     </div>
-    <app-star-rating></app-star-rating>
+    <app-star-rating [isFromLibrary]="false" (selectedStarRating)="getSelectedStarRating($event)"></app-star-rating>
     <div class="modal__btns">
       <button class="btn btn__close" (click)="closeModal()">Close</button>
       <button class="btn" (click)="addToFavourites()">Add to favourites</button>
     </div>
   </div>
 </dialog>
+
+<!-- (selectedStarRating)="getRating($event)" -->

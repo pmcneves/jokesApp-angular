@@ -6,13 +6,23 @@
         <option>Funnier first</option>
         <option>Not so funny first</option>
       </select>
-      <button>Clear all</button>
+      <button class="btn btn__library" (click)="removeAllFavourites()">
+        Clear all
+      </button>
     </div>
-    <div class="favourites" *ngFor="let singleJoke of jokesState; let i = index">
+    <div
+      class="favourites"
+      *ngFor="let singleJoke of jokesState; let i = index"
+    >
       <div class="favourite-container">
-        <h3 class="favourite-container__joke-counter">#{{i + 1}}</h3>
+        <h3 class="favourite-container__joke-counter">#{{ i + 1 }}</h3>
         <div class="favourite-container__joke">
           <app-joke [joke]="singleJoke"></app-joke>
+          <app-star-rating
+            [starRatingFromStore]="singleJoke.starRating"
+            [isFromLibrary]="true"
+            (selectedStarRating)="getSelectedStarRating($event, singleJoke.jokeData.id)"
+          ></app-star-rating>
         </div>
         <div class="favourite-container__removeBtn">
           <button (click)="removeFavourite(singleJoke.jokeData.id)">
@@ -25,5 +35,5 @@
 </section>
 
 <ng-template #noFavourites>
-      <h3>No favourites... yet!</h3>
+  <h3 class="no-favourites">No favourites... yet!</h3>
 </ng-template>

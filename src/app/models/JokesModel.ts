@@ -8,12 +8,13 @@ export type JokeData = {
   flags: Flags,
   id: number,
   safe: boolean,
-  lang: string
+  lang: string,
 }
 
 export type Joke = {
   jokeData: JokeData,
-  isFavourite: boolean
+  isFavourite: boolean,
+  starRating?: number,
 }
 
 interface Flags {

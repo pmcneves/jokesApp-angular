@@ -1,20 +1,27 @@
 @import "../../styles/base/settings.scss";
 
 .section {
-    text-align: center;
-    padding: $m-size;
-  }
+  padding: $xl-size;
+}
 
 .selections {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  select {
+    height: 37px;
+  }
+  & .btn {
+    &__library{
+      margin: 0;
+    }
+  }
+  
 }
 
 .favourites {
   margin: 0 auto;
-  text-align: center;
-  width: 95%;
   &:not(:last-child) {
     border-bottom: black solid 1px;
   }
@@ -23,23 +30,33 @@
 .favourite-container {
   display: flex;
   align-items: center;
+  margin-bottom: $xl-size;
+  margin-top: $xl-size;
   &__joke-counter {
     width: 10%;
   }
   &__joke {
     width: 85%;
     padding-right: $m-size;
+    text-align: center;
   }
   &__removeBtn {
     width: 5%;
     color: grey;
+    text-align: right;
     button {
       background: none;
       border: none;
       color: grey;
+      padding-right: 0;
       &:hover {
         color: red;
       }
     }
   }
 }
+
+.no-favourites {
+  text-align: center;
+}
+
