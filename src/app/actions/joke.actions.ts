@@ -29,3 +29,8 @@ export class EditJokeRating {
   static type = 'Edit rating for current joke';
   constructor(public id: number, public newRating: number) {}
 }
+
+export class SortBy {
+  static type = 'Sort by filter';
+  constructor(public sortBy: string) {}
+}

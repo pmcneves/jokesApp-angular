@@ -6,9 +6,10 @@ import {
   EditJokeRating,
   RemoveAllJokesFromFavourites,
   RemoveJoke,
+  SortBy,
 } from '../actions/joke.actions';
 import { Joke } from '../models/JokesModel';
-import { JokeState, JokeStateModel } from '../state/jokes.state';
+import { JokeState } from '../state/jokes.state';
 
 @Component({
   selector: 'app-library',
@@ -18,7 +19,10 @@ import { JokeState, JokeStateModel } from '../state/jokes.state';
 export class LibraryComponent implements OnInit {
   public jokesState: Joke[];
   public faTimes = faTimes;
+  public sortByModel: string = '';
+  public sortedBy: string
   @Select(JokeState.getJokes) jokesSelector$: Observable<Joke[]>;
+  @Select(JokeState.getSortedJokes) sortedJokesSelector$: Observable<Joke[]>;
 
   constructor(private store: Store) {}
 
@@ -37,7 +41,12 @@ export class LibraryComponent implements OnInit {
   }
 
   getSelectedStarRating(rating: number, id: number) {
-    console.log('library', rating, id);
     this.store.dispatch(new EditJokeRating(id, rating));
+  }
+
+  sortBySelectHandler(event: string) {
+    this.store.dispatch(new SortBy(event))
+    this.sortedBy = event
+    this.sortedJokesSelector$.subscribe(sortedArr => this.jokesState = sortedArr)
   }
 }

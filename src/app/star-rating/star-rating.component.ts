@@ -18,8 +18,9 @@ export class StarRatingComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.isFromLibrary)
+    if (this.isFromLibrary) {
       this.selectedRate = this.starRatingFromStore as number;
+    }
   }
 
   defineStarRating(rating: number) {

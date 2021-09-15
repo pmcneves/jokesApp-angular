@@ -15,6 +15,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal/modal.component';
 import { StarRatingComponent } from './star-rating/star-rating.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { StarRatingComponent } from './star-rating/star-rating.component';
     StarRatingComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,

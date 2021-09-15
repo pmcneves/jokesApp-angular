@@ -6,6 +6,7 @@ import {
   RemoveAllJokesFromFavourites,
   RemoveJoke,
   SetJokes,
+  SortBy,
 } from '../actions/joke.actions';
 import { Joke } from '../models/JokesModel';
 
@@ -13,6 +14,7 @@ export class JokeStateModel {
   joke: Joke | {};
   favourites: Joke[];
   error: string | null;
+  sortBy: string;
 }
 @State<JokeStateModel>({
   name: 'jokesState',
@@ -20,15 +22,32 @@ export class JokeStateModel {
     joke: {
       jokeData: {},
       isFavourite: false,
+      starRating: '',
     },
     favourites: [],
     error: null,
+    sortBy: '',
   },
 })
 export class JokeState {
   @Selector()
   static getJokes(state: JokeStateModel) {
     return state.favourites;
+  }
+
+  @Selector()
+  static getSortedJokes(state: JokeStateModel) {
+    const sortedFavourites: Joke[] = [...state.favourites].sort(
+      (j1: Joke, j2: Joke) : number => {
+        if (state.sortBy === 'ratingAsc') {
+          return j1.starRating < j2.starRating ? 1 : -1;
+        } else if (state.sortBy === 'ratingDesc') {
+          return j2.starRating < j1.starRating ? 1 : -1;
+        }
+        return 0
+      }
+    );
+    return sortedFavourites;
   }
 
   @Selector()
@@ -103,20 +122,28 @@ export class JokeState {
     ) as Joke;
     favouriteToEdit = {
       ...favouriteToEdit,
-      starRating: newRating
-    }
+      starRating: newRating,
+    };
     const favouriteToEditIndex = state.favourites.findIndex(
       (favourite) => favourite.jokeData.id === id
     );
-    console.log(favouriteToEdit, favouriteToEditIndex)
-
     patchState({
       favourites: [
         ...state.favourites.slice(0, favouriteToEditIndex),
         favouriteToEdit,
-        ...state.favourites.slice(favouriteToEditIndex+1),
-      ] as Joke[]
-    })
+        ...state.favourites.slice(favouriteToEditIndex + 1),
+      ] as Joke[],
+    });
     localStorage.setItem('favourites', JSON.stringify(getState().favourites));
+  }
+
+  @Action(SortBy)
+  sortByFilter(
+    { patchState }: StateContext<JokeStateModel>,
+    { sortBy }: SortBy
+  ) {
+    patchState({
+      sortBy: sortBy,
+    });
   }
 }

@@ -14,7 +14,7 @@ export type JokeData = {
 export type Joke = {
   jokeData: JokeData,
   isFavourite: boolean,
-  starRating?: number,
+  starRating: number,
 }
 
 interface Flags {
