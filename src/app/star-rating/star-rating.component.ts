@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,15 +11,20 @@ export class StarRatingComponent implements OnInit {
   starRating = new Array(5);
   selectedRate: number = 1;
   hover: number | null;
-  @Output() addToFavouritesClicked = new EventEmitter();
-
+  @Output() selectedStarRating = new EventEmitter<number>();
+  @Input() starRatingFromStore: number | undefined;
+  @Input() isFromLibrary: boolean;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.isFromLibrary)
+      this.selectedRate = this.starRatingFromStore as number;
+  }
 
-  setStarRating(rating: number) {
+  defineStarRating(rating: number) {
     this.selectedRate = rating;
+    this.selectedStarRating.emit(rating);
   }
 
   onStarHover(rating: number) {
@@ -28,9 +33,5 @@ export class StarRatingComponent implements OnInit {
 
   onStarLeave() {
     this.hover = null;
-  }
-
-  addToFavouritesModalClick() {
-    this.addToFavouritesClicked.emit();
   }
 }
