@@ -1,10 +1,10 @@
 <section class="section">
   <ng-container *ngIf="jokesState.length !== 0; else noFavourites">
     <div class="selections">
-      <select>
-        <option value="" disabled hidden>Choose option</option>
-        <option>Funnier first</option>
-        <option>Not so funny first</option>
+      <select [ngModel]="sortByModel"  (ngModelChange)="sortBySelectHandler($event)">
+        <option value="" disabled>Choose option</option>
+        <option value="ratingAsc">Funnier first</option>
+        <option value="ratingDesc">Not so funny first</option>
       </select>
       <button class="btn btn__library" (click)="removeAllFavourites()">
         Clear all

@@ -41,6 +41,7 @@ export class JokesComponent implements OnInit {
       this.joke = {
         jokeData: data,
         isFavourite: false,
+        starRating: 0,
       };
       this.loading = false;
       this.isAddedToFavourites = false;
