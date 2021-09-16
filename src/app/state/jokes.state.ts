@@ -6,27 +6,26 @@ import {
   RemoveAllJokesFromFavourites,
   RemoveJoke,
   SetJokes,
+  SetLoadingJoke,
   SortBy,
 } from '../actions/joke.actions';
 import { Joke } from '../models/JokesModel';
 
 export class JokeStateModel {
-  joke: Joke | {};
+  joke: Joke | null;
   favourites: Joke[];
   error: string | null;
   sortBy: string;
+  loading: boolean;
 }
 @State<JokeStateModel>({
   name: 'jokesState',
   defaults: {
-    joke: {
-      jokeData: {},
-      isFavourite: false,
-      starRating: '',
-    },
+    joke: null,
     favourites: [],
     error: null,
     sortBy: '',
+    loading: false,
   },
 })
 export class JokeState {
@@ -37,8 +36,8 @@ export class JokeState {
 
   @Selector()
   static getSortedJokes(state: JokeStateModel) {
-    const sortedFavourites: Joke[] = [...state.favourites].sort(
-      (j1: Joke, j2: Joke) : number => {
+    return [...state.favourites].sort(
+      (j1: Joke, j2: Joke): number => {
         if (state.sortBy === 'ratingAsc') {
           return j1.starRating < j2.starRating ? 1 : -1;
         } else if (state.sortBy === 'ratingDesc') {
@@ -47,12 +46,16 @@ export class JokeState {
         return 0
       }
     );
-    return sortedFavourites;
   }
 
   @Selector()
   static getJoke(state: JokeStateModel) {
     return state.joke;
+  }
+
+  @Selector()
+  static getLoadingJoke(state: JokeStateModel) {
+    return state.loading;
   }
 
   @Action(AddJokeToFavourites)
@@ -97,7 +100,7 @@ export class JokeState {
   ) {
     patchState({
       favourites: getState().favourites.filter(
-        (favourite) => favourite.jokeData!.id != id
+        (favourite) => favourite.jokeData?.id != id
       ),
     });
     localStorage.setItem('favourites', JSON.stringify(getState().favourites));
@@ -144,6 +147,16 @@ export class JokeState {
   ) {
     patchState({
       sortBy: sortBy,
+    });
+  }
+
+  @Action(SetLoadingJoke)
+  SetLoadingJoke(
+    { patchState }: StateContext<JokeStateModel>,
+    { payload }: SetLoadingJoke
+  ) {
+    patchState({
+      loading: payload,
     });
   }
 }

@@ -6,7 +6,7 @@
     <app-star-rating [isFromLibrary]="false" (selectedStarRating)="getSelectedStarRating($event)"></app-star-rating>
     <div class="modal__btns">
       <button class="btn btn__close" (click)="closeModal()">Close</button>
-      <button class="btn" (click)="addToFavourites()">Add to favourites</button>
+      <button [disabled]="!joke" class="btn" (click)="addToFavourites()">Add to favourites</button>
     </div>
   </div>
 </dialog>
