@@ -158,6 +158,5 @@ export class JokeState {
     patchState({
       loading: payload,
     });
-    localStorage.setItem('loading', JSON.stringify(payload));
   }
 }
