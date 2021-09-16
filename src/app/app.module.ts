@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal/modal.component';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { FormsModule } from '@angular/forms';
+import { FormComponent } from './form/form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     LibraryComponent,
     JokeComponent,
     ModalComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    FormComponent
   ],
   imports: [
     FormsModule,
