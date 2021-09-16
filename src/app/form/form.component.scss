@@ -1,0 +1,46 @@
+.input-field {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.input-field__label,
+.input-field__text {
+  transition: all 0.2s;
+}
+
+.input-field__text {
+  font-size: 1.5em;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  padding: 0;
+  cursor: text;
+  &:focus {
+    outline: 0;
+    border-bottom: 1px solid #666;
+  }
+}
+
+.input-field__label {
+  text-transform: uppercase;
+}
+
+input:placeholder-shown + .input-field__label {
+  cursor: text;
+  max-width: 66.66%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left bottom;
+  transform: translate(0, 2.125rem) scale(1.5);
+}
+
+input:focus::-webkit-input-placeholder {
+  opacity: 1;
+}
+
+input:not(:placeholder-shown) + label,
+input:focus + label {
+  transform: translate(0, 0) scale(1);
+  cursor: pointer;
+}
