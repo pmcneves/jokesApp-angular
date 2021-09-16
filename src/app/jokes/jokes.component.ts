@@ -14,39 +14,40 @@ import { JokeState } from '../state/jokes.state';
 })
 export class JokesComponent implements OnInit {
   faLaugh = faLaugh;
-  joke: Joke;
+  joke: Joke | null;
   loading: boolean = false;
   isAddedToFavourites: boolean = false;
   isModalOpen: boolean = false;
   @Select(JokeState.getJoke) jokeSelector$: Observable<Joke>;
+  @Select(JokeState.getLoadingJoke) loadingJokeSelector$: Observable<boolean>;
 
-  constructor(private jokesService: JokesService, private store: Store) {}
+  constructor(private jokesService: JokesService, private store: Store) { }
 
   ngOnInit(): void {
-    this.jokeSelector$.subscribe((joke) => !this.isObjectEmpty(joke.jokeData) ? (this.joke = joke) : {})
+    this.jokeSelector$.subscribe((joke) => !this.isObjectEmpty(joke?.jokeData) && (this.joke = joke));
+    this.loadingJokeSelector$.subscribe((isLoading) => this.loading = isLoading);
+
   }
 
   private isObjectEmpty(obj: {}): boolean {
-    for (const id in obj) {
+    if (obj && Object.keys(obj).length === 0) {
       return false;
     }
     return true;
   }
 
   gettingJokes() {
-    this.loading = true;
     this.jokesService.getJokes();
     this.jokesService.currentJoke
-    .subscribe((data) => {
-      this.joke = {
-        jokeData: data,
-        isFavourite: false,
-        starRating: 0,
-      };
-      this.loading = false;
-      this.isAddedToFavourites = false;
-      this.store.dispatch(new FetchNewJoke(this.joke));
-    });
+      .subscribe((data) => {
+        this.joke = {
+          jokeData: data,
+          isFavourite: false,
+          starRating: 0,
+        };
+        this.isAddedToFavourites = false;
+        this.store.dispatch(new FetchNewJoke(this.joke));
+      });
   }
 
   openModal() {

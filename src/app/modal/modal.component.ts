@@ -8,28 +8,29 @@ import { JokesService } from '../services/jokes/jokes.service';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   @Output() closeButtonClicked = new EventEmitter<boolean>();
-  @Input() joke: Joke;
+  @Input() joke: Joke | null;
   jokeRating: number = 1;
 
-  constructor(private store: Store, private jokesService: JokesService) {}
+  constructor(private store: Store, private jokesService: JokesService) { }
 
-  ngOnInit(): void {}
 
   closeModal() {
     this.closeButtonClicked.emit();
   }
 
   addToFavourites() {
-    this.joke = {
-      ...this.joke,
-      isFavourite: true,
-      starRating: this.jokeRating,
-    };
-    this.store.dispatch(new AddJokeToFavourites(this.joke));
-    this.jokesService.getJokes();
-    this.closeModal();
+    if (this.joke) {
+      this.joke = {
+        ...this.joke,
+        isFavourite: true,
+        starRating: this.jokeRating,
+      };
+      this.store.dispatch(new AddJokeToFavourites(this.joke));
+      this.jokesService.getJokes();
+      this.closeModal();
+    }
   }
 
   getSelectedStarRating(rating: number) {
