@@ -31,9 +31,9 @@ export class JokesComponent implements OnInit {
 
   private isObjectEmpty(obj: {}): boolean {
     if (obj && Object.keys(obj).length === 0) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 
   gettingJokes() {
