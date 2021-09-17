@@ -1,0 +1,58 @@
+@import "../../styles/base/settings.scss";
+
+.section {
+  text-align: center;
+  padding: $m-size;
+  box-sizing: border-box;
+}
+
+.form-component {
+   &__area {
+     display: flex;
+     justify-content: space-between;
+     &__field {
+       margin-bottom: $m-size;
+
+      &__input, select {
+        background: none;
+        border: none;
+        border-bottom: 1px solid $dark-blue;
+      }
+
+      textarea {
+        resize: vertical;
+        height: 62px;
+      }
+
+      select {
+        width: 100%;
+      }
+
+      &__label {
+        width: 100%;
+        text-align: left;
+        padding-bottom: $s-size;
+        font-size: 14px;
+        font-weight: bold;
+        color: $dark-blue
+      }
+    }
+   }
+ }
+
+ .flags-checkboxes {
+   display: flex;
+   &__area {
+     text-align: left;
+     &:first-child {
+       margin-right: $s-size;
+       input {
+         margin-left: 0;
+       }
+     }
+   }
+   & .checkbox:not(:last-child) {
+      margin-bottom: 7px;
+   }
+ }
+

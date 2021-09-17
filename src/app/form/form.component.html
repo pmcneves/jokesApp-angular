@@ -1,0 +1,128 @@
+<!-- <form class="form-component" #addJokeForm="ngForm" (ngSubmit)="onAddJokeFormSubmit(addJokeForm.value)">
+  <div class="form-component__field">
+    <label>Category</label>
+    <input placeholder="category" name="category" ngModel/>
+  </div>
+  <div class="form-component__field">
+    <label>Joke</label>    
+    <textarea placeholder="joke" name="joke" ngModel></textarea>
+  </div>
+  <div>
+    <button type="submit" class="btn">Add joke</button>
+  </div>
+</form> -->
+
+<section class="section">
+  <form
+    class="form-component"
+    #addJokeForm="ngForm"
+    (ngSubmit)="onAddJokeFormSubmit(addJokeForm.value)"
+  >
+    <div class="form-component__area">
+      <div class="form-component__area_column">
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Category</label>
+          </div>
+          <input
+            className="form-component__area__field__input"
+            placeholder="category"
+            name="category"
+            ngModel
+          />
+        </div>
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Type</label>
+          </div>
+          <select ngModel name="type">
+            <option value="" hidden>Choose option</option>
+            <option value="single">Single</option>
+            <option value="single">Two part</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-component__area_column">
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Flags</label>
+          </div>
+          <div class="flags-checkboxes">
+            <div class="flags-checkboxes__area">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.nsfw"
+                  name="nsfw"
+                />
+                <label>Nsfw</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.religious"
+                  name="religious"
+                />
+                <label>Religious</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.political"
+                  name="political"
+                />
+                <label>Political</label>
+              </div>
+            </div>
+            <div class="flags-checkboxes__area">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.racist"
+                  name="racist"
+                />
+                <label>Racist</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.sexist"
+                  name="sexist"
+                />
+                <label>Sexist</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.explicit"
+                  name="explicit"
+                />
+                <label>Explicit</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-component__area_column">
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Joke</label>
+          </div>
+          <textarea
+            className="form-component__area__field__textarea"
+            placeholder="joke"
+            name="joke"
+            ngModel
+          ></textarea>
+          <app-star-rating
+            [isFromLibrary]="false"
+            (selectedStarRating)="getSelectedStarRating($event)"
+          ></app-star-rating>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn">Add joke</button>
+    </div>
+  </form>
+</section>

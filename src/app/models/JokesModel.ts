@@ -1,5 +1,5 @@
 export type JokeData = {
-  error: string,
+  error: boolean,
   category: string,
   type: string,
   setup?: string,

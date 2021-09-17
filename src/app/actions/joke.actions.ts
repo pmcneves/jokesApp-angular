@@ -1,3 +1,4 @@
+import { FormModel } from '../models/FormModel';
 import { Joke } from '../models/JokesModel';
 
 export class AddJokeToFavourites {
@@ -36,4 +37,9 @@ export class SortBy {
 export class SetLoadingJoke {
   static type = 'Set Loading Joke';
   constructor(public payload: boolean) { }
+}
+
+export class AddCustomJoke {
+  static readonly type = 'Add Own Joke';
+  constructor(public data: FormModel, public rating: number){}
 }
