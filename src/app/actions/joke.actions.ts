@@ -37,3 +37,8 @@ export class SetLoadingJoke {
   static type = 'Set Loading Joke';
   constructor(public payload: boolean) { }
 }
+
+export class AddCustomJoke {
+  static readonly type = 'Add Own Joke';
+  constructor(public payload: {category: string, joke: string}){}
+}

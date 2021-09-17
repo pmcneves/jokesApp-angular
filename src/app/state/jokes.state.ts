@@ -1,5 +1,6 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {
+  AddCustomJoke,
   AddJokeToFavourites,
   EditJokeRating,
   FetchNewJoke,
@@ -159,4 +160,40 @@ export class JokeState {
       loading: payload,
     });
   }
+
+  @Action(AddCustomJoke)
+  addCustomJoke(
+    { getState, patchState }: StateContext<JokeStateModel>,
+    {payload} : AddCustomJoke) {
+      const addJokeObj: Joke = {
+        jokeData: {
+          error: false,
+          category: payload.category,
+          flags: {
+            nsfw: false,
+            religious: false,
+            political: false,
+            racist: false,
+            sexist: false,
+            explicit: false
+          },
+          id: Math.floor(Math.random()*1000),
+          joke: payload.joke,
+          type:'single',
+          safe: true,
+          lang: "en",
+        },
+        isFavourite: true,
+        starRating: 5
+      }
+      const state= getState()
+      patchState({
+        favourites: [
+          ...state.favourites,
+          addJokeObj
+        ]
+      })
+    }
 }
+
+

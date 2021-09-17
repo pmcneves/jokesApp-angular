@@ -1,21 +1,92 @@
-<form>
-  <div class="input-field">
-    <input
-      name="joke"
-      class="input-field__text"
-      type="text"
-      placeholder="enter joke"
-    />
-    <label for="joke" class="input-field__label">Joke</label>
+<!-- <form class="form-component" #addJokeForm="ngForm" (ngSubmit)="onAddJokeFormSubmit(addJokeForm.value)">
+  <div class="form-component__field">
+    <label>Category</label>
+    <input placeholder="category" name="category" ngModel/>
   </div>
-</form>
+  <div class="form-component__field">
+    <label>Joke</label>    
+    <textarea placeholder="joke" name="joke" ngModel></textarea>
+  </div>
+  <div>
+    <button type="submit" class="btn">Add joke</button>
+  </div>
+</form> -->
 
-<!-- <div class="field">
-  <input
-    type="text"
-    name="fullname"
-    id="fullname"
-    placeholder="Jane Appleseed"
-  />
-  <label for="fullname">Name</label>
-</div> -->
+<section class="section">
+  <form
+    class="form-component"
+    #addJokeForm="ngForm"
+    (ngSubmit)="onAddJokeFormSubmit(addJokeForm.value)"
+  >
+    <div class="form-component__area">
+      <div class="form-component__area_column">
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Category</label>
+          </div>
+          <input placeholder="category" name="category" ngModel />
+        </div>
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Type</label>
+          </div>
+          <select>
+            <option value="" hidden>Choose option</option>
+            <option value="single">Single</option>
+            <option value="twopart">Two part</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-component__area_column">
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Flags</label>
+          </div>
+          <div class="checkbox-area">
+            <div class="checkbox">
+              <input type="checkbox" />
+              <label for="scales">Nsfw</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" />
+              <label for="scales">Nsfw</label>
+            </div>
+            
+          </div>
+          <div class="checkbox-area">
+            <div class="checkbox">
+              <input type="checkbox" />
+              <label for="scales">Nsfw</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" />
+              <label for="scales">Nsfw</label>
+            </div>
+          </div>
+          <div class="checkbox-area">
+            <div class="checkbox">
+              <input type="checkbox" />
+              <label for="scales">Nsfw</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" />
+              <label for="scales">Nsfw</label>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="form-component__area_column">
+        <div class="form-component__area__field">
+          <div class="form-component__area__field__label">
+            <label>Joke</label>
+          </div>
+          <textarea placeholder="joke" name="category" ngModel></textarea>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn">Add joke</button>
+    </div>
+  </form>
+</section>

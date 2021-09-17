@@ -1,46 +1,49 @@
-.input-field {
-  display: flex;
-  flex-direction: column-reverse;
+@import "../../styles/base/settings.scss";
+
+.section {
+  text-align: center;
+  padding: $m-size;
+  box-sizing: border-box;
 }
 
-.input-field__label,
-.input-field__text {
-  transition: all 0.2s;
-}
+.form-component {
+   &__area {
+     display: flex;
+     justify-content: space-between;
+     &__field {
+       margin-bottom: $m-size;
 
-.input-field__text {
-  font-size: 1.5em;
-  border: 0;
-  border-bottom: 1px solid #ccc;
-  border-radius: 0;
-  padding: 0;
-  cursor: text;
-  &:focus {
-    outline: 0;
-    border-bottom: 1px solid #666;
-  }
-}
+      input,
+      textarea {
+        width: 160px;
+      }
 
-.input-field__label {
-  text-transform: uppercase;
-}
+      input, select {
+        background: none;
+        border: none;
+        border-bottom: 1px solid $dark-blue;
+      }
 
-input:placeholder-shown + .input-field__label {
-  cursor: text;
-  max-width: 66.66%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transform-origin: left bottom;
-  transform: translate(0, 2.125rem) scale(1.5);
-}
+      textarea {
+        resize: vertical;
+      }
 
-input:focus::-webkit-input-placeholder {
-  opacity: 1;
-}
+      select {
+        width: 100%;
+      }
 
-input:not(:placeholder-shown) + label,
-input:focus + label {
-  transform: translate(0, 0) scale(1);
-  cursor: pointer;
-}
+      &__label {
+        width: 100%;
+        text-align: left;
+        padding-bottom: $s-size;
+        font-size: 14px;
+        font-weight: bold;
+        color: $dark-blue
+      }
+    }
+   }
+ }
+
+ .checkbox-area {
+   display: flex;
+ }
