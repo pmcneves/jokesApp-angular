@@ -164,27 +164,31 @@ export class JokeState {
   @Action(AddCustomJoke)
   addCustomJoke(
     { getState, patchState }: StateContext<JokeStateModel>,
-    {payload} : AddCustomJoke) {
+    {data, rating} : AddCustomJoke) {
+      let isSafe: boolean = true;
+      if(data.nsfw || data.racist || data.sexist || data.explicit){
+        isSafe = false
+      }
       const addJokeObj: Joke = {
         jokeData: {
           error: false,
-          category: payload.category,
+          category: data.category,
           flags: {
-            nsfw: false,
-            religious: false,
-            political: false,
-            racist: false,
-            sexist: false,
-            explicit: false
+            nsfw: data.nsfw,
+            religious: data.religious,
+            political: data.political,
+            racist: data.racist,
+            sexist: data.sexist,
+            explicit: data.explicit
           },
           id: Math.floor(Math.random()*1000),
-          joke: payload.joke,
-          type:'single',
-          safe: true,
+          joke: data.joke,
+          type: data.type,
+          safe: isSafe,
           lang: "en",
         },
         isFavourite: true,
-        starRating: 5
+        starRating: rating
       }
       const state= getState()
       patchState({

@@ -13,12 +13,7 @@
      &__field {
        margin-bottom: $m-size;
 
-      input,
-      textarea {
-        width: 160px;
-      }
-
-      input, select {
+      &__input, select {
         background: none;
         border: none;
         border-bottom: 1px solid $dark-blue;
@@ -26,6 +21,7 @@
 
       textarea {
         resize: vertical;
+        height: 62px;
       }
 
       select {
@@ -44,6 +40,19 @@
    }
  }
 
- .checkbox-area {
+ .flags-checkboxes {
    display: flex;
+   &__area {
+     text-align: left;
+     &:first-child {
+       margin-right: $s-size;
+       input {
+         margin-left: 0;
+       }
+     }
+   }
+   & .checkbox:not(:last-child) {
+      margin-bottom: 7px;
+   }
  }
+

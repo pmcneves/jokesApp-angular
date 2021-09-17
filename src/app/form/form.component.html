@@ -24,16 +24,21 @@
           <div class="form-component__area__field__label">
             <label>Category</label>
           </div>
-          <input placeholder="category" name="category" ngModel />
+          <input
+            className="form-component__area__field__input"
+            placeholder="category"
+            name="category"
+            ngModel
+          />
         </div>
         <div class="form-component__area__field">
           <div class="form-component__area__field__label">
             <label>Type</label>
           </div>
-          <select>
+          <select ngModel name="type">
             <option value="" hidden>Choose option</option>
             <option value="single">Single</option>
-            <option value="twopart">Two part</option>
+            <option value="single">Two part</option>
           </select>
         </div>
       </div>
@@ -42,38 +47,60 @@
           <div class="form-component__area__field__label">
             <label>Flags</label>
           </div>
-          <div class="checkbox-area">
-            <div class="checkbox">
-              <input type="checkbox" />
-              <label for="scales">Nsfw</label>
+          <div class="flags-checkboxes">
+            <div class="flags-checkboxes__area">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.nsfw"
+                  name="nsfw"
+                />
+                <label>Nsfw</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.religious"
+                  name="religious"
+                />
+                <label>Religious</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.political"
+                  name="political"
+                />
+                <label>Political</label>
+              </div>
             </div>
-            <div class="checkbox">
-              <input type="checkbox" />
-              <label for="scales">Nsfw</label>
+            <div class="flags-checkboxes__area">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.racist"
+                  name="racist"
+                />
+                <label>Racist</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.sexist"
+                  name="sexist"
+                />
+                <label>Sexist</label>
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="publicForm.explicit"
+                  name="explicit"
+                />
+                <label>Explicit</label>
+              </div>
             </div>
-            
           </div>
-          <div class="checkbox-area">
-            <div class="checkbox">
-              <input type="checkbox" />
-              <label for="scales">Nsfw</label>
-            </div>
-            <div class="checkbox">
-              <input type="checkbox" />
-              <label for="scales">Nsfw</label>
-            </div>
-          </div>
-          <div class="checkbox-area">
-            <div class="checkbox">
-              <input type="checkbox" />
-              <label for="scales">Nsfw</label>
-            </div>
-            <div class="checkbox">
-              <input type="checkbox" />
-              <label for="scales">Nsfw</label>
-            </div>
-          </div>
-          
         </div>
       </div>
       <div class="form-component__area_column">
@@ -81,7 +108,16 @@
           <div class="form-component__area__field__label">
             <label>Joke</label>
           </div>
-          <textarea placeholder="joke" name="category" ngModel></textarea>
+          <textarea
+            className="form-component__area__field__textarea"
+            placeholder="joke"
+            name="joke"
+            ngModel
+          ></textarea>
+          <app-star-rating
+            [isFromLibrary]="false"
+            (selectedStarRating)="getSelectedStarRating($event)"
+          ></app-star-rating>
         </div>
       </div>
     </div>
