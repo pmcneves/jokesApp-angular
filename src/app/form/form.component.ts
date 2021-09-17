@@ -11,17 +11,19 @@ import { FormModel } from '../models/FormModel';
 export class FormComponent implements OnInit {
   publicForm: FormModel;
   rating: number = 1;
-
-  constructor(private store: Store) {}
+  reset: boolean;
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.publicForm = new FormModel();
   }
 
   onAddJokeFormSubmit(data: FormModel) {
-    this.store.dispatch(new AddCustomJoke(data, this.rating));
+    console.log(data);
+    // this.store.dispatch(new AddCustomJoke(data, this.rating));
     this.publicForm = new FormModel();
-    this.rating = 1;
+    this.rating = 10;
+    this.reset = true;
   }
 
   getSelectedStarRating(rating: number) {

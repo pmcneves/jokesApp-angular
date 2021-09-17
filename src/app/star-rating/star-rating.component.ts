@@ -14,12 +14,19 @@ export class StarRatingComponent implements OnInit {
   @Output() selectedStarRating = new EventEmitter<number>();
   @Input() starRatingFromStore: number | undefined;
   @Input() isFromLibrary: boolean;
+  @Input() reset = false;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
+    console.log(this.starRatingFromStore, this.isFromLibrary);
     if (this.isFromLibrary) {
       this.selectedRate = this.starRatingFromStore as number;
+    }
+  }
+  ngOnChanges(changes: any) {
+    if (this.reset) {
+      this.resetStars();
     }
   }
 
@@ -33,6 +40,11 @@ export class StarRatingComponent implements OnInit {
   }
 
   onStarLeave() {
+    this.hover = null;
+  }
+
+  resetStars() {
+    this.selectedRate = 1;
     this.hover = null;
   }
 }
